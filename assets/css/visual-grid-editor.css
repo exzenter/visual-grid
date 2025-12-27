@@ -1,0 +1,98 @@
+/**
+ * Visual Grid - Editor Styles
+ */
+
+/* Panel styling */
+.visual-grid-panel {
+    border-top: 1px solid #e0e0e0;
+}
+
+.visual-grid-panel .components-panel__body-title {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 4px;
+    margin: 0 -16px;
+    padding: 0 16px;
+}
+
+.visual-grid-panel .components-panel__body-title button {
+    color: white;
+}
+
+.visual-grid-panel .components-panel__body-title button:hover {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Side controls */
+.visual-grid-side-controls {
+    padding: 12px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #e0e0e0;
+}
+
+.visual-grid-side-controls h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e1e1e;
+    margin: 0 0 12px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Color picker button */
+.visual-grid-color-picker {
+    position: relative;
+    display: inline-block;
+}
+
+.visual-grid-color-button {
+    cursor: pointer;
+    transition: box-shadow 0.2s ease;
+}
+
+.visual-grid-color-button:hover {
+    box-shadow: 0 0 0 2px #007cba;
+}
+
+/* Tabs styling */
+.visual-grid-tabs .components-tab-panel__tabs {
+    margin-bottom: 12px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.visual-grid-tabs .components-tab-panel__tabs button {
+    font-size: 12px;
+    padding: 8px 12px;
+}
+
+.visual-grid-tabs .components-tab-panel__tabs button.is-active {
+    color: #007cba;
+    box-shadow: inset 0 -2px 0 0 #007cba;
+}
+
+/* Range controls */
+.visual-grid-panel .components-range-control {
+    margin-bottom: 8px;
+}
+
+/* Toggle controls */
+.visual-grid-panel .components-toggle-control {
+    margin-bottom: 12px;
+}
+
+/* Select controls */
+.visual-grid-panel .components-select-control {
+    margin-bottom: 12px;
+}
+
+/* Link button */
+.visual-grid-panel .components-button.is-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+}
+
+.visual-grid-panel .components-button.is-secondary {
+    border: 2px dashed #ccc;
+    background: transparent;
+}

@@ -1,0 +1,17 @@
+{
+    "name": "visual-grid",
+    "version": "1.0.0",
+    "description": "Visual Grid lines for Gutenberg and Kadence blocks",
+    "author": "Visual Grid Team",
+    "license": "GPL-2.0-or-later",
+    "main": "build/index.js",
+    "scripts": {
+        "build": "wp-scripts build",
+        "start": "wp-scripts start",
+        "format": "wp-scripts format",
+        "lint:js": "wp-scripts lint-js"
+    },
+    "devDependencies": {
+        "@wordpress/scripts": "^27.0.0"
+    }
+}
