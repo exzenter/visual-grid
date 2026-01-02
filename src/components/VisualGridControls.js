@@ -12,7 +12,8 @@ import {
     ColorPicker,
     Popover,
     __experimentalUnitControl as UnitControl,
-    TabPanel
+    TabPanel,
+    TextareaControl
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import { PRESETS, applyPreset, DEFAULT_SIDE_CONFIG } from '../presets';
@@ -201,6 +202,22 @@ export default function VisualGridControls({ visualGrid, setAttributes }) {
                         help={__('Hide grid lines on mobile devices (< 768px)', 'visual-grid')}
                         checked={visualGrid.disableOnMobile !== false}
                         onChange={(value) => updateVisualGrid({ disableOnMobile: value })}
+                    />
+
+                    <TextareaControl
+                        label={__('Exclusion Selectors (Flow Around)', 'visual-grid')}
+                        help={__('Lines stop before these elements and continue after. Best for transparent elements.', 'visual-grid')}
+                        value={visualGrid.exclusionSelectors || ''}
+                        onChange={(value) => updateVisualGrid({ exclusionSelectors: value })}
+                        rows={2}
+                    />
+
+                    <TextareaControl
+                        label={__('Overlay Selectors (Cover Lines)', 'visual-grid')}
+                        help={__('These elements appear above the lines. Best for elements with solid backgrounds.', 'visual-grid')}
+                        value={visualGrid.overlaySelectors || ''}
+                        onChange={(value) => updateVisualGrid({ overlaySelectors: value })}
+                        rows={2}
                     />
 
                     <div style={{ marginBottom: '16px' }}>

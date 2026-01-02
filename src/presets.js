@@ -62,6 +62,8 @@ export const DEFAULT_VISUAL_GRID = {
     linked: true,
     preventOverlap: false,
     disableOnMobile: true,
+    exclusionSelectors: '',
+    overlaySelectors: '',
     topBottom: { ...DEFAULT_SIDE_CONFIG },
     leftRight: { ...DEFAULT_SIDE_CONFIG },
     top: { ...DEFAULT_SIDE_CONFIG },
