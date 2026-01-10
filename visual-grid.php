@@ -56,7 +56,7 @@ function visual_grid_enqueue_frontend_assets() {
         array(),
         VISUAL_GRID_VERSION
     );
-    
+
     wp_enqueue_script(
         'visual-grid-frontend',
         VISUAL_GRID_URL . 'assets/js/visual-grid-frontend.js',
@@ -64,8 +64,77 @@ function visual_grid_enqueue_frontend_assets() {
         VISUAL_GRID_VERSION,
         true
     );
+
+    // Pass settings to frontend
+    wp_localize_script('visual-grid-frontend', 'visual_grid_settings', array(
+        'console_output' => (bool) get_option('visual_grid_console_output', 0)
+    ));
 }
 add_action('wp_enqueue_scripts', 'visual_grid_enqueue_frontend_assets');
+
+/**
+ * Add Admin Menu and Settings
+ */
+function visual_grid_admin_menu() {
+    add_options_page(
+        __('Visual Grid Settings', 'visual-grid'),
+        __('Visual Grid', 'visual-grid'),
+        'manage_options',
+        'visual-grid',
+        'visual_grid_settings_page'
+    );
+}
+add_action('admin_menu', 'visual_grid_admin_menu');
+
+/**
+ * Register Settings
+ */
+function visual_grid_register_settings() {
+    register_setting('visual_grid_settings', 'visual_grid_console_output', array(
+        'type' => 'boolean',
+        'default' => false,
+        'sanitize_callback' => 'rest_sanitize_boolean'
+    ));
+
+    add_settings_section(
+        'visual_grid_main_section',
+        __('General Settings', 'visual-grid'),
+        null,
+        'visual-grid'
+    );
+
+    add_settings_field(
+        'visual_grid_console_output',
+        __('Console Output', 'visual-grid'),
+        'visual_grid_console_output_render',
+        'visual-grid',
+        'visual_grid_main_section'
+    );
+}
+add_action('admin_init', 'visual_grid_register_settings');
+
+function visual_grid_console_output_render() {
+    $value = get_option('visual_grid_console_output', 0);
+    ?>
+    <input type="checkbox" name="visual_grid_console_output" value="1" <?php checked(1, $value); ?> />
+    <p class="description"><?php _e('Enable console logging on the frontend for debugging.', 'visual-grid'); ?></p>
+    <?php
+}
+
+function visual_grid_settings_page() {
+    ?>
+    <div class="wrap">
+        <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
+        <form action="options.php" method="post">
+            <?php
+            settings_fields('visual_grid_settings');
+            do_settings_sections('visual-grid');
+            submit_button();
+            ?>
+        </form>
+    </div>
+    <?php
+}
 
 /**
  * Add visual grid data attributes to block wrapper

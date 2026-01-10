@@ -7,7 +7,25 @@
 (function () {
     'use strict';
 
-    console.log('Visual Grid: Script loaded (v5 - html absolute)');
+    /**
+     * Conditional logger
+     */
+    function vgLog() {
+        if (window.visual_grid_settings && window.visual_grid_settings.console_output) {
+            console.log.apply(console, arguments);
+        }
+    }
+
+    /**
+     * Conditional warning
+     */
+    function vgWarn() {
+        if (window.visual_grid_settings && window.visual_grid_settings.console_output) {
+            console.warn.apply(console, arguments);
+        }
+    }
+
+    vgLog('Visual Grid: Script loaded (v5 - html absolute)');
 
     /**
      * Check if current viewport is mobile (< 768px)
@@ -114,7 +132,7 @@
                     rects.push(getDocumentOffset(elements[j]));
                 }
             } catch (e) {
-                console.warn('Visual Grid: Invalid selector "' + selectorList[i] + '"', e);
+                vgWarn('Visual Grid: Invalid selector "' + selectorList[i] + '"', e);
             }
         }
 
@@ -265,7 +283,7 @@
         try {
             visualGrid = JSON.parse(dataAttr);
         } catch (e) {
-            console.error('Visual Grid: Failed to parse', e);
+            vgWarn('Visual Grid: Failed to parse', e);
             return;
         }
 
@@ -273,12 +291,12 @@
 
         // Check if disabled on mobile
         if (visualGrid.disableOnMobile !== false && isMobileViewport()) {
-            console.log('Visual Grid: Skipping element on mobile');
+            vgLog('Visual Grid: Skipping element on mobile');
             return;
         }
 
         var pos = getDocumentOffset(element);
-        console.log('Visual Grid: Element at', pos);
+        vgLog('Visual Grid: Element at', pos);
 
         // Get exclusion rects
         var exclusionRects = getExclusionRects(visualGrid.exclusionSelectors);
@@ -298,7 +316,7 @@
                         el.style.zIndex = '1';
                     }
                 } catch (e) {
-                    console.warn('Visual Grid: Invalid overlay selector "' + overlayList[i] + '"', e);
+                    vgWarn('Visual Grid: Invalid overlay selector "' + overlayList[i] + '"', e);
                 }
             }
         }
@@ -411,7 +429,7 @@
      * Initialize visual grid
      */
     function init() {
-        console.log('Visual Grid: Initializing v5...');
+        vgLog('Visual Grid: Initializing v5...');
 
         // Remove existing container
         var existing = document.getElementById('visual-grid-container');
@@ -420,7 +438,7 @@
         }
 
         var elements = document.querySelectorAll('[data-visual-grid]');
-        console.log('Visual Grid: Found ' + elements.length + ' elements');
+        vgLog('Visual Grid: Found ' + elements.length + ' elements');
 
         if (elements.length === 0) return;
 
@@ -458,7 +476,7 @@
         }
         document.body.appendChild(container);
 
-        console.log('Visual Grid: Created', container.children.length, 'lines');
+        vgLog('Visual Grid: Created', container.children.length, 'lines');
     }
 
     // Debounce helper
