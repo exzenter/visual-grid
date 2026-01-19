@@ -353,7 +353,9 @@
                 var lineStart, lineEnd, linePos;
 
                 if (isHorizontal) {
-                    linePos = (side === 'top') ? pos.top : pos.bottom;
+                    // Position borders fully inside the element to prevent overflow
+                    // Top border starts at element edge, bottom border offset by full width
+                    linePos = (side === 'top') ? pos.top : pos.bottom - config.width;
 
                     if (config.lengthMode === 'page') {
                         lineStart = 0;
@@ -369,7 +371,9 @@
                         lineEnd = lineStart + relWidth;
                     }
                 } else {
-                    linePos = (side === 'left') ? pos.left : pos.right;
+                    // Position borders fully inside the element to prevent overflow
+                    // Left border starts at element edge, right border offset by full width
+                    linePos = (side === 'left') ? pos.left : pos.right - config.width;
 
                     if (config.lengthMode === 'page') {
                         lineStart = 0;
