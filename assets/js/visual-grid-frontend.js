@@ -260,7 +260,7 @@
             line.style.height = height;
             line.style.width = config.width + 'px';
             line.style.top = topPos;
-            line.style.left = (side === 'left' ? pos.left : pos.right) + 'px';
+            line.style.left = (side === 'left' ? pos.left : pos.right - config.width) + 'px';
             line.style.background = getBackgroundStyle(config.style, color, 'vertical');
         }
 
@@ -411,7 +411,7 @@
                         line.style.height = segLength + 'px';
                         line.style.width = config.width + 'px';
                         line.style.top = seg.start + 'px';
-                        line.style.left = linePos + 'px';
+                        line.style.left = (side === 'left' ? linePos : linePos - config.width) + 'px';
                         line.style.background = getBackgroundStyle(config.style, color, 'vertical');
                     }
 
