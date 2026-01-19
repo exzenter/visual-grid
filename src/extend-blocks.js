@@ -8,7 +8,6 @@ import { Fragment, useMemo } from '@wordpress/element';
 import VisualGridControls from './components/VisualGridControls';
 import { DEFAULT_VISUAL_GRID } from './presets';
 import { generateVisualGridCSS } from './utils/css-generator';
-import { stripDefaults } from './utils/strip-defaults';
 
 /**
  * List of supported blocks
@@ -122,12 +121,9 @@ function addVisualGridDataAttributes(extraProps, blockType, attributes) {
         return extraProps;
     }
 
-    // Strip default values to reduce HTML payload
-    const strippedGrid = stripDefaults(visualGrid);
-
     return {
         ...extraProps,
-        'data-visual-grid': JSON.stringify(strippedGrid),
+        'data-visual-grid': JSON.stringify(visualGrid),
         className: `${extraProps.className || ''} has-visual-grid`.trim()
     };
 }
