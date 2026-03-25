@@ -62,13 +62,21 @@ function visual_grid_enqueue_frontend_assets() {
         VISUAL_GRID_URL . 'assets/js/visual-grid-frontend.js',
         array(),
         VISUAL_GRID_VERSION,
-        true
+        array(
+            'in_footer' => true,
+            'strategy' => 'defer'
+        )
     );
 
-    // Pass settings to frontend
-    wp_localize_script('visual-grid-frontend', 'visual_grid_settings', array(
+    // Pass settings to frontend using wp_add_inline_script to avoid HTML entity encoding issues
+    $settings = array(
         'console_output' => (bool) get_option('visual_grid_console_output', 0)
-    ));
+    );
+    wp_add_inline_script(
+        'visual-grid-frontend',
+        'var visual_grid_settings = ' . wp_json_encode($settings, JSON_HEX_TAG | JSON_HEX_AMP) . ';',
+        'before'
+    );
 }
 add_action('wp_enqueue_scripts', 'visual_grid_enqueue_frontend_assets');
 
